@@ -641,8 +641,19 @@ clientbuttons = gears.table.join(
 root.keys(globalkeys)
 -- }}}
 
+
+-- Fix for matlab warning box
+_old_filter = awful.client.focus.filter
+awful.client.focus.filter = function(c)
+    if c.type == 'dialog' and string.match(c.class, 'MATLAB') then
+      return nil
+    end
+    return _old_filter(c)
+end
+
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
+
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
@@ -674,8 +685,11 @@ awful.rules.rules = {
       properties = { screen = 1, tag = awful.util.tagnames[1] } },
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
-          properties = { maximized = true } },
+      properties = { maximized = true } },
+--    { rule = { class = "MATLAB R2017a - academic use"},
+--      properties = { focus = false } },
 }
+ 
 -- }}}
 
 -- {{{ Signals
