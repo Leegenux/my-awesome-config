@@ -410,10 +410,10 @@ globalkeys = my_table.join(
     	      {description = "open rofi search box", group = "launcher"}),
 
     -- Brightness
-    awful.key({ altkey }, "Right", function () os.execute("sudo xbacklight -inc 10") end,
-              {description = "+10%", group = "hotkeys"}),
-    awful.key({ altkey }, "left", function () os.execute("sudo xbacklight -dec 10") end,
-              {description = "-10%", group = "hotkeys"}),
+--    awful.key({ altkey }, "Right", function () os.execute("sudo xbacklight -inc 10") end,
+--              {description = "+10%", group = "hotkeys"}),
+--    awful.key({ altkey }, "Left", function () os.execute("sudo xbacklight -dec 10") end,
+--              {description = "-10%", group = "hotkeys"}),
 
     -- ALSA volume control
     awful.key({ altkey }, "Up",
