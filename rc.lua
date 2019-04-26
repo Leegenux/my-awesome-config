@@ -436,7 +436,7 @@ globalkeys = my_table.join(
             os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
             beautiful.volume.update()
         end,
--       {description = "toggle mute", group = "hotkeys"}),
+       {description = "toggle mute", group = "hotkeys"}),
 --    awful.key({ altkey, "Control" }, "m",
 --        function ()
 --            os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
@@ -777,6 +777,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Startup Applications
 awful.util.spawn("nm-applet &")
+awful.util.spawn("kmix &")
 -- awful.util.spawn("xss-lock -- i3lock -n -i /home/leegenux/Pictures/
 
 -- possible workaround for tag preservation when switching back to default screen:
