@@ -15,6 +15,9 @@ local freedesktop = require("freedesktop")
 -- Enable VIM help for hotkeys widget when client with matching name is opened:
 require("awful.hotkeys_popup.keys.vim")
 
+-- Lain
+local lain          = require("lain")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -61,6 +64,7 @@ terminal = os.getenv("TERMINAL") or "konsole"
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
+altkey = "Mod1"
 modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -272,6 +276,11 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
+    awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
+              {description = "view  previous nonempty", group = "tag"}),
+    awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
+              {description = "view  previous nonempty", group = "tag"}),
+
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
@@ -343,6 +352,20 @@ globalkeys = gears.table.join(
               {description = "capture a screenshot of active window", group = "screenshot"}),
     awful.key({"Shift"            }, "Print", function () awful.spawn.with_shell("sleep 0.1 && /usr/bin/i3-scrot -s")   end,
               {description = "capture a screenshot of selection", group = "screenshot"}),
+
+    -- ALSA volume control from branch master
+--    awful.key({ altkey }, "Up",
+--    -- awful.key({ }, "XF86AudioRaiseVolume",
+--        function ()
+--            os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
+--        end,
+--        {description = "volume up", group = "hotkeys"}),
+--    awful.key({ altkey }, "Down",
+--    -- awful.key({ }, "XF86AudioLowerVolume",
+--        function ()
+--            os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
+--        end,
+--        {description = "volume down", group = "hotkeys"}),
 
     awful.key({ modkey, "Control" }, "n",
               function ()
