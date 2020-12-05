@@ -5,6 +5,8 @@
 
 --]]
 
+-- TODO fix awesome volume_now
+
 -- {{{ Required libraries
 local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
 local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
@@ -416,21 +418,23 @@ globalkeys = my_table.join(
     awful.key({ altkey }, "Up",
     -- awful.key({ }, "XF86AudioRaiseVolume",
         function ()
-            os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
+            -- os.execute(string.format("amixer -c 1 set %s 5%+", beautiful.volume.channel))
+            os.execute("amixer -c 1 set Master 10%+")
             beautiful.volume.update()
         end,
         {description = "volume up", group = "hotkeys"}),
     awful.key({ altkey }, "Down",
     -- awful.key({ }, "XF86AudioLowerVolume",
         function ()
-            os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
+            -- os.execute(string.format("amixer -c 1 -q set %s 5%-", beautiful.volume.channel))
+            os.execute("amixer -c 1 set Master 10%-")
             beautiful.volume.update()
         end,
         {description = "volume down", group = "hotkeys"}),
     awful.key({ altkey }, "m",
     -- awful.key({ }, "XF86AudioMute",
         function ()
-            os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
+            os.execute(string.format("amixer -c 1 -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
             beautiful.volume.update()
         end,
        {description = "toggle mute", group = "hotkeys"}),
