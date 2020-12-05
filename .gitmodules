@@ -1,3 +1,6 @@
 [submodule "lain"]
 	path = lain
 	url = https://github.com/lcpz/lain.git
+[submodule "themes/cesious-theme"]
+	path = themes/cesious-theme
+	url = https://gitlab.com/ThanosApostolou/cesious-theme.git
