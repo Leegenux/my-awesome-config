@@ -16,7 +16,7 @@ local wibox         = require("wibox")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local lain          = require("lain")
---local menubar       = require("menubar")
+local menubar       = require("menubar")
 local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
                       require("awful.hotkeys_popup.keys")
@@ -38,7 +38,6 @@ do
     awesome.connect_signal("debug::error", function (err)
         if in_error then return end
         in_error = true
-
         naughty.notify({ preset = naughty.config.presets.critical,
                          title = "Oops, an error happened!",
                          text = tostring(err) })
@@ -59,19 +58,17 @@ end
 run_once({ "urxvtd", "unclutter -root" }) -- entries must be separated by commas
 
 -- This function implements the XDG autostart specification
---[[
 awful.spawn.with_shell(
     'if (xrdb -query | grep -q "^awesome\\.started:\\s*true$"); then exit; fi;' ..
     'xrdb -merge <<< "awesome.started:true";' ..
+
     -- list each of your autostart commands, followed by ; inside single quotes, followed by ..
+    'utools;' ..
+    'flatpak run com.nextcloud.desktopclient.nextcloud' ..
     'dex --environment Awesome --autostart --search-paths "$XDG_CONFIG_DIRS/autostart:$XDG_CONFIG_HOME/autostart"' -- https://github.com/jceb/dex
 )
---]]
-
--- }}}
 
 -- {{{ Variable definitions
-
 local themes = {
     "blackburn",       -- 1
     "copland",         -- 2
@@ -88,9 +85,9 @@ local themes = {
 local chosen_theme = themes[5]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "konsole"
+local terminal     = "gnome-terminal" or "xterm"
 local editor       = os.getenv("EDITOR") or "vim"
-local gui_editor   = "gvim"
+local gui_editor   = "vim"
 local browser      = "vivaldi-stable"
 local guieditor    = "code"
 local scrlocker    = "sleep 0.5 && xtrlock"
@@ -503,10 +500,9 @@ globalkeys = my_table.join(
               {description = "run gui editor", group = "launcher"}),
 
     -- Default
-    --[[ Menubar
+    -- Menu bar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
-    --]]
+              {description = "show the menubar", group = "launcher"}),
     --[[ dmenu
     awful.key({ modkey }, "x", function ()
             os.execute(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
@@ -653,7 +649,6 @@ end
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
-
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
@@ -670,24 +665,30 @@ awful.rules.rules = {
     },
 
     -- Titlebars
-    { rule_any = { type = {  "normal" } },
+    { rule_any = { type = { "normal" } },
       properties = { titlebars_enabled = true } },
 
-    { rule = { floating = true },
-      properties = { ontop = true } },
-
---     -- Set dialogs floating and ontop
---     { rule_any = { type = { "dialog", "toolbar" } },
---       properties = { titlebars_enabled = true,  ontop = true, floating = true } },
+    -- Set dialogs floating and ontop
+    { rule_any = { type = { "dialog", "toolbar" } },
+      properties = { floating = true } },
 
     -- Set Firefox to always map on the first tag on screen 1.
-    { rule = { class = "Firefox" },
-      properties = { screen = 1, tag = awful.util.tagnames[1] } },
+    -- { rule = { class = "Firefox" },
+    -- properties = { screen = 1, tag = awful.util.tagnames[1] } },
+
+    -- Set guake to be floating
+    { rule = { class = "Guake" },
+    properties = { floating = true } },
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
       properties = { maximized = true } },
+
 --    { rule = { class = "MATLAB R2017a - academic use"},
 --      properties = { focus = false } },
+
+    -- Floating windows
+    { rule = { floating = true },
+      properties = { ontop = true, titlebars_enabled = false } },
 }
  
 -- }}}
@@ -756,9 +757,9 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = true})
-end)
+-- client.connect_signal("mouse::enter", function(c)
+--     c:emit_signal("request::activate", "mouse_enter", {raise = true})
+-- end)
 
 -- No border for maximized clients
 function border_adjust(c)
@@ -777,7 +778,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Startup Applications
 awful.util.spawn("nm-applet &")
-awful.util.spawn("kmix &")
+-- awful.util.spawn("kmix &")
 -- awful.util.spawn("xss-lock -- i3lock -n -i /home/leegenux/Pictures/
 
 -- possible workaround for tag preservation when switching back to default screen:
