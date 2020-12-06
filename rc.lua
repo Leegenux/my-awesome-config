@@ -49,6 +49,7 @@ beautiful.titlebar_close_button_normal = "~/.config/awesome/themes/cesious-theme
 beautiful.titlebar_close_button_focus = "~/.config/awesome/themes/cesious-theme/cesious/titlebar/close_focus_adapta.png"
 beautiful.font              = "Noto Sans Regular 10"
 beautiful.notification_font = "Noto Sans Bold 14"
+-- customized part
 beautiful.wallpaper = "/home/leegenux/Pictures/jr-farren--20zZkZU58o-unsplash.jpg"
 
 -- This is used later as the default terminal and editor to run.
