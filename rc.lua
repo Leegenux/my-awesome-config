@@ -3,6 +3,7 @@ local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
+local lain = require("lain")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
@@ -375,7 +376,7 @@ globalkeys = gears.table.join(
 )
 
 clientkeys = gears.table.join(
-    awful.key({ modkey,           }, "f",
+    awful.key({ modkey, }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
             c:raise()
@@ -472,7 +473,8 @@ clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise()
                  mymainmenu:hide() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
-    awful.button({ modkey }, 3, awful.mouse.client.resize))
+    awful.button({ modkey }, 3, awful.mouse.client.resize)
+)
 
 -- Set keys
 root.keys(globalkeys)
