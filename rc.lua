@@ -45,7 +45,7 @@ end
 beautiful.init("~/.config/awesome/themes/cesious-theme/cesious/theme.lua")
 beautiful.icon_theme        = "Papirus-Dark"
 beautiful.bg_normal         = "#222D32"
-beautiful.bg_focus          = "#2C3940"
+beautiful.bg_focus          = "#3f4f5f"
 beautiful.titlebar_close_button_normal = "~/.config/awesome/themes/cesious-theme/cesious/titlebar/close_normal_adapta.png"
 beautiful.titlebar_close_button_focus = "~/.config/awesome/themes/cesious-theme/cesious/titlebar/close_focus_adapta.png"
 beautiful.font              = "Noto Sans Regular 10"
