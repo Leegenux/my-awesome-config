@@ -43,3 +43,7 @@ run blueman-applet
 run msm_notifier
 run clash-linux-amd64
 run utools
+run guake
+
+run /home/leegenux/Applications//clash-linux-amd64
+run /opt/apps/com.baidu.fcitx-baidupinyin/files/bin/bd-qimpanel.watchdog.sh
