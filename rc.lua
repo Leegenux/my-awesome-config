@@ -41,20 +41,21 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 -- Chosen colors and buttons look alike adapta maia theme
-beautiful.init("/usr/share/awesome/themes/cesious/theme.lua")
+beautiful.init("~/.config/awesome/themes/cesious-theme/cesious/theme.lua")
 beautiful.icon_theme        = "Papirus-Dark"
 beautiful.bg_normal         = "#222D32"
 beautiful.bg_focus          = "#2C3940"
-beautiful.titlebar_close_button_normal = "/usr/share/awesome/themes/cesious/titlebar/close_normal_adapta.png"
-beautiful.titlebar_close_button_focus = "/usr/share/awesome/themes/cesious/titlebar/close_focus_adapta.png"
+beautiful.titlebar_close_button_normal = "~/.config/awesome/themes/cesious-theme/cesious/titlebar/close_normal_adapta.png"
+beautiful.titlebar_close_button_focus = "~/.config/awesome/themes/cesious-theme/cesious/titlebar/close_focus_adapta.png"
 beautiful.font              = "Noto Sans Regular 10"
 beautiful.notification_font = "Noto Sans Bold 14"
+beautiful.wallpaper = "/home/leegenux/Pictures/jr-farren--20zZkZU58o-unsplash.jpg"
 
 -- This is used later as the default terminal and editor to run.
 browser = "exo-open --launch WebBrowser" or "firefox"
 filemanager = "exo-open --launch FileManager" or "thunar"
 gui_editor = "mousepad"
-terminal = os.getenv("TERMINAL") or "lxterminal"
+terminal = os.getenv("TERMINAL") or "gnome-terminal"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -68,9 +69,7 @@ awful.layout.layouts = {
     awful.layout.suit.floating,
     --awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.tile.top,/.config/awesome/themes/cesious-theme/cesious/,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
@@ -122,7 +121,7 @@ mymainmenu = freedesktop.menu.build({
         -- other triads can be put here
     },
     after = {
-        { "Awesome", myawesomemenu, "/usr/share/awesome/icons/awesome32.png" },
+        { "Awesome", myawesomemenu, "~/.config/awesome/themes/cesious-theme/cesious/icons/manjaro32.png"},
         { "Exit", myexitmenu, menubar.utils.lookup_icon("system-shutdown") },
         -- other triads can be put here
     }
@@ -511,7 +510,9 @@ awful.rules.rules = {
           "Wpa_gui",
           "pinentry",
           "veromix",
-          "xtightvncviewer"},
+          "xtightvncviewer",
+          "Guake"
+        },
 
         name = {
           "Event Tester",  -- xev.
@@ -600,12 +601,12 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-        and awful.client.focus.filter(c) then
-        client.focus = c
-    end
-end)
+-- client.connect_signal("mouse::enter", function(c)
+--     if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+--         and awful.client.focus.filter(c) then
+--         client.focus = c
+--     end
+-- end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
@@ -654,3 +655,64 @@ end
 
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 
+-- -- {{{ Tag Wallpaper
+-- -- Set according to wallpaper directory
+-- local path = os.getenv("HOME") .. "/Pictures/wallpapers/"
+-- -- Set to number of used tags
+-- local num_tabs = 9
+-- -- Other variables
+-- local num_files = 0
+-- local wp_all = {}
+-- local wp_selected = {}
+-- math.randomseed(os.time());
+-- -- To guarantee unique random numbers on every platform, pop a few
+-- for i = 1,10 do
+-- 	math.random()
+-- end
+
+-- -- LUA implementation of PHP scan dir
+-- -- Returns all files (except . and ..) in "directory"
+-- function scandir(directory)
+-- 	num_files, t, popen = 0, {}, io.popen
+-- 	for filename in popen('ls -a "'..directory..'"'):lines() do
+-- 		-- If case to disregard "." and ".."
+-- 		if(not(filename == "." or filename == "..")) then
+-- 			num_files = num_files + 1
+-- 			t[num_files] = filename
+-- 		end
+-- 	end
+-- 	return t
+-- end
+
+-- -- Basically a modern Fisher-Yates shuffle
+-- -- Returns "tabs" elements from an table "wp" of length "files"
+-- -- Guarantees no duplicated elements in the return while having linear runtime 
+-- function select(wp,files,tabs)
+-- 	local selected = {}
+-- 	for i=1,tabs do
+-- 		position = math.random(1,files)
+-- 		selected[i] = wp[position]
+-- 		wp[position] = wp[files]
+-- 		files = files - 1
+-- 	end
+-- 	return selected
+-- end
+
+-- -- Get the names of "num_tabs" files from "num_files" total files in "path"
+-- wp_selected = select(scandir(path),num_files,num_tabs)
+
+-- -- For each screen
+-- for s = 1, screen.count() do
+-- 	-- Set wallpaper on first tab (else it would be empty at start up)
+-- 	gears.wallpaper.fit(path .. wp_selected[1], s)
+-- 	-- Go over each tab
+-- 	for t = 1, num_tabs do
+-- 		tags[s][t]:connect_signal("property::selected", function (tag)
+-- 		-- And if selected
+-- 			if not tag.selected then return end
+-- 			-- Set wallpaper
+-- 			gears.wallpaper.fit(path .. wp_selected[t], s)
+-- 		end)
+-- 	end
+-- end
+-- -- }}}
