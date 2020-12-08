@@ -18,7 +18,7 @@ function run_with {}
 #     /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 # fi
 
-run_with 'gnome-keyring-daemon' 'gnome-keyring-d' 'gnome-keyring-daemon --daemonize --login'
+run_with gnome-keyring-daemon gnome-keyring-d 'gnome-keyring-daemon --daemonize --login'
 run_with start-pulseaudio-x11 pulseaudio start-pulseaudio-x11
 run_with xfce4-power-manager xfce4-power-man xfce4-power-manager 
 run_with system-config-printer-applet applet.py system-config-printer-applet
@@ -33,6 +33,7 @@ run thunar --daemon
 run pasystray
 run compton --shadow-exclude '!focused'
 run blueman-applet
+run keychain
 # run pa-applet
 # run pamac-tray
 # run msm_notifier
