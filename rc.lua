@@ -42,12 +42,12 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 -- Chosen colors and buttons look alike adapta maia theme
-beautiful.init("~/.config/awesome/themes/cesious-theme/cesious/theme.lua")
+beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/cesious-theme/cesious/theme.lua")
 beautiful.icon_theme        = "Papirus-Dark"
 beautiful.bg_normal         = "#222D32"
 beautiful.bg_focus          = "#3f4f5f"
-beautiful.titlebar_close_button_normal = "~/.config/awesome/themes/cesious-theme/cesious/titlebar/close_normal_adapta.png"
-beautiful.titlebar_close_button_focus = "~/.config/awesome/themes/cesious-theme/cesious/titlebar/close_focus_adapta.png"
+beautiful.titlebar_close_button_normal = os.getenv("HOME") .. "/.config/awesome/themes/cesious-theme/cesious/titlebar/close_normal_adapta.png"
+beautiful.titlebar_close_button_focus = os.getenv("HOME") .. "/.config/awesome/themes/cesious-theme/cesious/titlebar/close_focus_adapta.png"
 beautiful.font              = "Noto Sans Regular 10"
 beautiful.notification_font = "Noto Sans Bold 14"
 -- customized part
