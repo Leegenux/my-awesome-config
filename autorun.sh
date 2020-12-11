@@ -30,18 +30,20 @@ run xfce4-volumed
 run nm-applet
 run xcape -e 'Super_L=Super_L|Control_L|Escape'
 run pasystray
-run compton --shadow-exclude '!focused'
+# run compton --shadow-exclude '!focused'
 run blueman-applet
 run keychain
-# run thunar --daemon
-# run pa-applet
-# run pamac-tray
+run thunar --daemon
+run pa-applet
+run pamac-tray
+run picom
 # run msm_notifier
 
 ## The following are not included in minimal edition by default
 ## but autorun.sh will pick them up if you install them
 run utools
 run guake
-run_with flatpak nextcloud 'flatpak run com.nextcloud.desktopclient.nextcloud'
-run_with clash-linux-amd64 clash-linux-amd64 /home/leegenux/Applications/clash-linux-amd64
+run_with file clash-linux-amd64 /home/leegenux/Applications/clash-linux-amd64
+run_with file npm 'cd /home/leegenux/Applications/clash-dashboard/ && npm start'
 run_with file bd-qimpanel.watchdog.sh /opt/apps/com.baidu.fcitx-baidupinyin/files/bin/bd-qimpanel.watchdog.sh
+run_with flatpak nextcloud 'flatpak run com.nextcloud.desktopclient.nextcloud'
