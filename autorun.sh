@@ -29,12 +29,12 @@ run xfce4-screensaver
 run xfce4-volumed
 run nm-applet
 run xcape -e 'Super_L=Super_L|Control_L|Escape'
-run pasystray
+#run pasystray
 run compton --shadow-exclude '!focused'
 run picom --shadow-exclude '!focused'
 run blueman-applet
 run keychain
-run thunar --daemon
+#run thunar --daemon
 run pa-applet
 run pamac-tray
 # run picom
@@ -47,4 +47,4 @@ run guake
 run_with file clash-linux-amd64 /home/leegenux/Applications/clash-linux-amd64
 run http-server -p 8080 /home/leegenux/own_packages/clash-dashboard/dist
 run_with flatpak nextcloud 'flatpak run com.nextcloud.desktopclient.nextcloud'
-run_with file bd-qimpanel.watchdog.sh /opt/apps/com.baidu.fcitx-baidupinyin/files/bin/bd-qimpanel.watchdog.sh
+#run_with file bd-qimpanel.watchdog.sh /opt/apps/com.baidu.fcitx-baidupinyin/files/bin/bd-qimpanel.watchdog.sh
