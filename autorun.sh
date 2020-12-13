@@ -2,19 +2,19 @@
 
 ## run (only once) processes which spawn with the same name
 function run {
-   if (command -v $1 && ! pgrep $1); then
+   if (command -v $1 && ! pgrep -f $1); then
      $@&
    fi
 }
 
 function run_with {
-   if (command -v $1 && ! pgrep $2); then
+   if (command -v $1 && ! pgrep -f $2); then
      $3
    fi
 }
 
 ## run (only once) processes which spawn with different name
-# if (command -v /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 && ! pgrep polkit-mate-aut) ; then
+# if (command -v /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 && ! pgrep -f polkit-mate-aut) ; then
 #     /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 # fi
 
@@ -30,13 +30,14 @@ run xfce4-volumed
 run nm-applet
 run xcape -e 'Super_L=Super_L|Control_L|Escape'
 run pasystray
-# run compton --shadow-exclude '!focused'
+#run compton --shadow-exclude '!focused'
+run picom --shadow-exclude '!focused'
 run blueman-applet
 run keychain
 run thunar --daemon
 run pa-applet
 run pamac-tray
-run picom
+# run picom
 # run msm_notifier
 
 ## The following are not included in minimal edition by default
@@ -44,6 +45,6 @@ run picom
 run utools
 run guake
 run_with file clash-linux-amd64 /home/leegenux/Applications/clash-linux-amd64
-run_with file npm 'cd /home/leegenux/Applications/clash-dashboard/ && npm start'
-run_with file bd-qimpanel.watchdog.sh /opt/apps/com.baidu.fcitx-baidupinyin/files/bin/bd-qimpanel.watchdog.sh
+run http-server -p 8080 /home/leegenux/own_packages/clash-dashboard/dist
 run_with flatpak nextcloud 'flatpak run com.nextcloud.desktopclient.nextcloud'
+run_with file bd-qimpanel.watchdog.sh /opt/apps/com.baidu.fcitx-baidupinyin/files/bin/bd-qimpanel.watchdog.sh
