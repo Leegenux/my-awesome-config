@@ -480,6 +480,15 @@ clientbuttons = gears.table.join(
 root.keys(globalkeys)
 -- }}}
 
+-- Fix for matlab warning box
+_old_filter = awful.client.focus.filter
+awful.client.focus.filter = function(c)
+    if c.type == 'dialog' and string.match(c.class, 'MATLAB') then
+      return nil
+    end
+    return _old_filter(c)
+end
+
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {

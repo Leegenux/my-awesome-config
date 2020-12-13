@@ -30,7 +30,7 @@ run xfce4-volumed
 run nm-applet
 run xcape -e 'Super_L=Super_L|Control_L|Escape'
 run pasystray
-#run compton --shadow-exclude '!focused'
+run compton --shadow-exclude '!focused'
 run picom --shadow-exclude '!focused'
 run blueman-applet
 run keychain
