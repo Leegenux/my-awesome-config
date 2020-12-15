@@ -33,7 +33,7 @@ run xcape -e 'Super_L=Super_L|Control_L|Escape'
 run compton --shadow-exclude '!focused'
 run picom --shadow-exclude '!focused'
 run blueman-applet
-run keychain
+# run keychain
 #run thunar --daemon
 run pa-applet
 run pamac-tray
